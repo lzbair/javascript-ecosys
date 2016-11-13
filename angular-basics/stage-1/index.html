@@ -1,0 +1,17 @@
+<html lang="en">
+  <head>
+    <title> Hello </title>
+    <link href="styles/main.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body ng-app="myTasks">
+	  <h1 tk-title></h1>
+	  <div ng-controller="taskService">
+		  <input type="text"   ng-model="description"/>
+		  <input type="button" value="Create" ng-click="createTask()"/>
+          </div>
+    <script src="vendor/angular.js" type="text/javascript"></script>
+    <script src="scripts/app.js" type="text/javascript"></script>
+    <script src="scripts/my-tasks.js" type="text/javascript"></script>
+
+  </body>
+</html>
