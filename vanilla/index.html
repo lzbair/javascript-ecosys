@@ -1,12 +1,25 @@
 <html>
 <head>
   <title>Market</title>
+  <meta charset="UTF-8"> 
   <link href="styles/main.css" rel="stylesheet" type="text/cxx">
 </head>
 <body>
-  <label for="search">Search: </label>
-  <input id="search" type="text"/><br/>
-  <span id="products"></span>
+    <div>
+        Filters:
+        <label for="title">By title </label>
+        <input id="title" type="text"/>
+        <label for="price">Greater than price </label>
+        <input id="price" type="text"/>
+        <label for="sort">Sort</label>
+        <select id="sort">
+            <option value="-" selected="true" disabled="disabled">N/A</option>
+            <option value="a">Ascending</option>
+            <option value="d">Descending</option>
+        </select>
+        <span id="clear" style="display:none"><a href="/">Clear</a></span>
+    </div>
+  <p id="products"></p>
   <script src="scripts/base.js" type="text/javascript"></script>
 </body>
 </html>
