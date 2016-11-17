@@ -18,7 +18,7 @@ var products = [
 
 (function(window, document){
 get('products').innerHTML = load(products);
-get('search').onkeyup = function(event) {get('products').innerHTML = search(String.fromCharCode(event.keyCode))};
+get('search').oninput = function(event) {get('products').innerHTML = search(event.target['value'])};
 
 function search(value) {
   return  load(products.filter(function(p) {
