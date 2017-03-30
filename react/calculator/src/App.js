@@ -21,36 +21,70 @@ class App extends Component {
           <h2>Hello {formatName(user)} !</h2>
         </div>
         <p className="App-intro">
-          <Number/> <br/>
-          <Operator/> <br/>
-          <Number/> <br/>
+        <Password/>
         </p>
       </div>
     );
   }
 }
 
-class Frame extends Component {
+class Password extends Component {
   constructor(props) {
     super(props);
-    this.state = {name: props.frameName, value: props.frameValue};
+    this.state = {rules : [
+      {
+        rule: ".{8,}",
+        score: "3"
+      },
+      {
+        rule: ".*[a-z]",
+        score: "2"
+      },
+      {
+        rule: ".*[0-9]",
+        score: "2"
+      },
+      {
+        rule: ".*[A-Z]",
+        score: "1"
+      }
+    ]};
+  }
+  handleChange(event) {
+   this.setState({pwdValue: event.target.value});
+   this.evaluate(this.state["pwdValue"]);
+ }
+  evaluate(pwd) {
+    var score = this.state
+                    .rules
+                    .filter(function(r) {return new RegExp(r["rule"]).test(pwd)})
+                    .map(function(r) {return r["score"]})
+                    .reduce(function(s1, s2) {return s1 + s2});
+    console.log(score);
   }
   render() {
-    return (<input type="text" id={this.state.name} value={this.state.value}/>);
+    return (
+      <div>
+        <label> Your password </label>
+        <input type="password" id="pwd" onKeyUp={this.handleChange.bind(this)}/>
+        <StrengthStatus/>
+      </div>
+    );
   }
 }
 
-class Number extends Component {
+class StrengthStatus extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {score: props.score};
+  }
   render() {
-    return (<Frame frameName="Number" frameValue="10"/>);
+    return (
+      <div>
+        <meter min="0" max="100" value={this.state["score"]}/>
+      </div>
+    );
   }
 }
-
-class Operator extends Component {
-  render() {
-    return (<Frame frameName="Operator" frameValue="+"/>);
-  }
-}
-
 
 export default App;
