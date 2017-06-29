@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductCatalogService } from './product/product-catalog.service';
 
 
 @Component({
@@ -6,6 +7,12 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'app';
+  products : any[];
+
+  constructor(service : ProductCatalogService){
+    this.products = service.loadAll();
+  }
 }
